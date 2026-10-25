@@ -7,9 +7,9 @@
 <title>تکه — جزوه‌خوان</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- آیکن برند تکه -->
-<link rel="icon" type="image/png" href="https://cdn.imgurl.ir/uploads/l644211_.png">
-<link rel="apple-touch-icon" href="https://cdn.imgurl.ir/uploads/l644211_.png">
+<!-- آیکن و لوگو (تغییر یافته به گیت‌هاب) -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png">
 <meta name="apple-mobile-web-app-title" content="تکه">
 <meta name="application-name" content="تکه">
 <meta name="mobile-web-app-capable" content="yes">
@@ -25,12 +25,7 @@
     -webkit-user-select:none;
 }
 
-/* حذف کامل کادر فوکوس مرورگر از همه‌چیز */
-*:focus,
-*:focus-visible,
-*:active{
-    outline:none !important;
-}
+*:focus, *:focus-visible, *:active{ outline:none !important; }
 
 html,body{
     width:100%;
@@ -44,9 +39,7 @@ html,body{
     outline:none !important;
 }
 
-body{
-    transition: background .25s ease, color .25s ease;
-}
+body{ transition: background .25s ease, color .25s ease; }
 
 #app{
     position:relative;
@@ -58,486 +51,236 @@ body{
 }
 
 /* ================= صفحه‌ها ================= */
-
 .screen{
     position:absolute;
     inset:0;
     display:none;
     flex-direction:column;
 }
-
 .screen.show{ display:flex; }
 
-/* ================= خوش‌آمد ================= */
+/* ================= اسپلش اسکرین ================= */
+#scSplash {
+    align-items: center;
+    justify-content: center;
+    background: #0d1117;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+#scSplash.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+.splash-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: pulse 2s infinite ease-in-out;
+}
+.splash-box img {
+    width: 160px;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 25px rgba(163,113,247,.4));
+}
+.loading-bar {
+    width: 120px;
+    height: 4px;
+    background: #21262d;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.loading-bar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 40%;
+    background: #a371f7;
+    border-radius: 4px;
+    animation: loadAnim 1.5s infinite ease-in-out;
+}
+@keyframes loadAnim {
+    0% { left: -40%; width: 40%; }
+    50% { width: 60%; }
+    100% { left: 100%; width: 40%; }
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 
+/* ================= خوش‌آمد ================= */
 #scStart{
     align-items:center;
     justify-content:center;
     padding:30px 24px;
 }
-
-#scStart .box{
-    width:100%;
-    max-width:820px;
-}
-
+#scStart .box{ width:100%; max-width:820px; }
 #scStart .brand-logo{
     display:block;
-    width:96px;
-    height:96px;
+    width:96px; height:96px;
     object-fit:contain;
     margin:0 auto 16px;
     filter: brightness(1.3) saturate(1.1) drop-shadow(0 0 20px rgba(163,113,247,.3));
 }
-
 #scStart h1{
-    font-size:1.5rem;
-    font-weight:700;
-    color:#a371f7;
-    margin-bottom:6px;
-    text-align:center;
-    letter-spacing:.5px;
+    font-size:1.5rem; font-weight:700;
+    color:#a371f7; margin-bottom:6px;
+    text-align:center; letter-spacing:.5px;
 }
-
 #scStart .sub{
-    font-size:.95rem;
-    color:#7d8590;
-    margin-bottom:22px;
-    text-align:center;
-    line-height:1.9;
+    font-size:.95rem; color:#7d8590;
+    margin-bottom:22px; text-align:center; line-height:1.9;
 }
-
 #scStart textarea{
-    width:100%;
-    height:260px;
-    background:#010409;
-    border:1px solid #21262d;
-    border-radius:14px;
-    color:#e6edf3;
-    font-family:inherit;
-    font-size:1rem;
-    line-height:2;
-    padding:16px;
-    resize:none;
-    user-select:text;
-    -webkit-user-select:text;
-    transition:border-color .2s;
-    outline:none !important;
+    width:100%; height:260px;
+    background:#010409; border:1px solid #21262d;
+    border-radius:14px; color:#e6edf3;
+    font-family:inherit; font-size:1rem;
+    line-height:2; padding:16px; resize:none;
+    user-select:text; -webkit-user-select:text;
+    transition:border-color .2s; outline:none !important;
 }
-
-#scStart textarea:focus{
-    border-color:#a371f7;
-    outline:none !important;
-    box-shadow:none !important;
-}
-
-#scStart .row{
-    display:flex;
-    gap:10px;
-    margin-top:16px;
-}
-
+#scStart textarea:focus{ border-color:#a371f7; outline:none !important; box-shadow:none !important; }
+#scStart .row{ display:flex; gap:10px; margin-top:16px; }
 #scStart button{
-    flex:1;
-    min-height:52px;
-    border-radius:12px;
-    border:1px solid #21262d;
-    background:#161b22;
-    color:#e6edf3;
-    font-family:inherit;
-    font-size:1rem;
-    font-weight:500;
-    cursor:pointer;
+    flex:1; min-height:52px; border-radius:12px;
+    border:1px solid #21262d; background:#161b22;
+    color:#e6edf3; font-family:inherit; font-size:1rem;
+    font-weight:500; cursor:pointer;
     transition:transform .12s, background .2s;
-    outline:none !important;
-    -webkit-appearance:none;
-    appearance:none;
+    outline:none !important; -webkit-appearance:none; appearance:none;
 }
-
 #scStart button:active{ transform:scale(.97); background:#21262d; }
-
-#scStart button.primary{
-    background:#a371f7;
-    color:#0d1117;
-    border-color:#a371f7;
-    font-weight:700;
-}
-
+#scStart button.primary{ background:#a371f7; color:#0d1117; border-color:#a371f7; font-weight:700; }
 #scStart button.primary:active{ background:#8957e5; }
-
-#scStart .hint{
-    font-size:.78rem;
-    color:#484f58;
-    margin-top:16px;
-    line-height:2;
-    text-align:center;
-}
+#scStart .hint{ font-size:.78rem; color:#484f58; margin-top:16px; line-height:2; text-align:center; }
 
 /* ================= نمایش ================= */
-
-#scView{
-    padding:0;
-}
-
+#scView{ padding:0; }
 #viewTop{
-    flex:0 0 auto;
-    height:48px;
-    display:flex;
-    align-items:center;
-    padding:0 12px;
-    border-bottom:1px solid #161b22;
-    background:#0d1117;
+    flex:0 0 auto; height:48px; display:flex;
+    align-items:center; padding:0 12px;
+    border-bottom:1px solid #161b22; background:#0d1117;
 }
-
 #hamburger{
-    width:40px;
-    height:40px;
-    border:none;
-    background:transparent;
-    color:#7d8590;
-    cursor:pointer;
-    display:grid;
-    place-items:center;
-    padding:0;
-    transition:color .15s;
-    outline:none !important;
-    -webkit-appearance:none;
-    appearance:none;
+    width:40px; height:40px; border:none; background:transparent;
+    color:#7d8590; cursor:pointer; display:grid; place-items:center;
+    padding:0; transition:color .15s; outline:none !important;
 }
-
 #hamburger:active{ color:#e6edf3; }
-#hamburger:focus{ outline:none !important; }
-
-#hamburger svg{
-    width:22px;
-    height:22px;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:2;
-    stroke-linecap:round;
-}
-
-#viewTop .top-logo{
-    width:28px;
-    height:28px;
-    object-fit:contain;
-    margin-left:8px;
-    flex:0 0 auto;
-    filter: brightness(1.3) saturate(1.1);
-}
-
+#hamburger svg{ width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+#viewTop .top-logo{ width:28px; height:28px; object-fit:contain; margin-left:8px; flex:0 0 auto; filter: brightness(1.3) saturate(1.1); }
 #viewTitle{
-    flex:1;
-    font-size:.8rem;
-    color:#484f58;
-    text-align:center;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    padding:0 8px;
+    flex:1; font-size:.8rem; color:#484f58; text-align:center;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 8px;
 }
-
 #counter{
-    flex:0 0 auto;
-    font-size:.78rem;
-    color:#484f58;
-    min-width:64px;
-    text-align:left;
-    font-variant-numeric:tabular-nums;
-    letter-spacing:.5px;
+    flex:0 0 auto; font-size:.78rem; color:#484f58;
+    min-width:64px; text-align:left;
+    font-variant-numeric:tabular-nums; letter-spacing:.5px;
 }
-
 #viewBody{
-    flex:1;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-    padding:40px 28px 90px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    outline:none !important;
+    flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    padding:40px 28px 90px; display:flex;
+    align-items:center; justify-content:center;
+    position:relative; outline:none !important;
 }
-
 #chunk{
-    width:100%;
-    max-width:900px;
-    font-size:1.7rem;
-    font-weight:500;
-    line-height:2.2;
-    color:#e6edf3;
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    text-align:center;
-    user-select:text;
-    -webkit-user-select:text;
-    outline:none !important;
+    width:100%; max-width:900px; font-size:1.7rem;
+    font-weight:500; line-height:2.2; color:#e6edf3;
+    white-space:pre-wrap; word-wrap:break-word;
+    text-align:center; user-select:text; -webkit-user-select:text;
 }
+#progressWrap{ flex:0 0 auto; height:3px; background:#161b22; position:relative; }
+#progress{ height:100%; background:#a371f7; width:0%; transition:width .2s ease; }
 
-/* نوار پیشرفت پایین */
-#progressWrap{
-    flex:0 0 auto;
-    height:3px;
-    background:#161b22;
-    position:relative;
-}
-
-#progress{
-    height:100%;
-    background:#a371f7;
-    width:0%;
-    transition:width .2s ease;
-}
-
-/* دکمه‌های ناوبری لمسی — کاملاً بدون فوکوس */
+/* دکمه‌های ناوبری لمسی */
 .navBtn{
-    position:absolute;
-    top:48px;
-    bottom:3px;
-    width:50%;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    z-index:5;
-    padding:0;
-    outline:none !important;
-    box-shadow:none !important;
-    -webkit-tap-highlight-color:transparent;
-    -webkit-appearance:none;
-    appearance:none;
-    pointer-events:auto;
+    position:absolute; top:48px; bottom:3px; width:50%;
+    background:transparent; border:none; cursor:pointer;
+    z-index:5; padding:0; outline:none !important;
+    box-shadow:none !important; -webkit-tap-highlight-color:transparent;
 }
-
 .navBtn.left{ left:0; }
 .navBtn.right{ right:0; }
-
-.navBtn:focus,
-.navBtn:focus-visible,
-.navBtn:active,
-.navBtn:hover{
-    outline:none !important;
-    box-shadow:none !important;
-    border:none !important;
-    background:transparent !important;
+.navBtn:focus, .navBtn:active, .navBtn:hover{
+    outline:none !important; box-shadow:none !important;
+    border:none !important; background:transparent !important;
 }
-
-.navBtn::-moz-focus-inner{ border:0; }
-
 .navBtn::after{
-    content:'';
-    position:absolute;
-    top:50%;
-    width:12px;
-    height:12px;
-    border-top:2px solid #30363d;
-    border-right:2px solid #30363d;
-    margin-top:-7px;
-    transition:border-color .15s;
-    pointer-events:none;
+    content:''; position:absolute; top:50%;
+    width:12px; height:12px;
+    border-top:2px solid #30363d; border-right:2px solid #30363d;
+    margin-top:-7px; transition:border-color .15s; pointer-events:none;
 }
-
 .navBtn.right::after{ right:18px; transform:rotate(45deg); }
-.navBtn.left::after{  left:18px;  transform:rotate(-135deg); }
-
+.navBtn.left::after{ left:18px; transform:rotate(-135deg); }
 .navBtn:active::after{ border-color:#a371f7; }
 
 /* ================= منو ================= */
-
 #menu{
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    width:280px;
-    max-width:82%;
-    background:#161b22;
-    border-left:1px solid #21262d;
-    z-index:20;
-    transform:translateX(100%);
-    transition:transform .22s ease;
-    display:flex;
-    flex-direction:column;
-    padding:22px 0;
+    position:absolute; top:0; right:0; bottom:0; width:280px; max-width:82%;
+    background:#161b22; border-left:1px solid #21262d; z-index:20;
+    transform:translateX(100%); transition:transform .22s ease;
+    display:flex; flex-direction:column; padding:22px 0;
 }
-
 #menu.show{ transform:translateX(0); }
-
-#menu .menu-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:0 22px 18px;
-}
-
-#menu .menu-brand img{
-    width:46px;
-    height:46px;
-    object-fit:contain;
-    flex:0 0 auto;
-    filter: brightness(1.3) saturate(1.1) drop-shadow(0 2px 8px rgba(163,113,247,.25));
-}
-
-#menu .menu-brand-name{
-    font-size:1rem;
-    font-weight:700;
-    color:#e6edf3;
-    line-height:1.4;
-}
-
-#menu .menu-brand-tag{
-    font-size:.72rem;
-    color:#484f58;
-    letter-spacing:.5px;
-}
-
-#menu h3{
-    font-size:.72rem;
-    font-weight:600;
-    color:#484f58;
-    padding:0 22px 14px;
-    letter-spacing:1.5px;
-}
-
+#menu .menu-brand{ display:flex; align-items:center; gap:12px; padding:0 22px 18px; }
+#menu .menu-brand img{ width:46px; height:46px; object-fit:contain; flex:0 0 auto; filter: brightness(1.3) saturate(1.1); }
+#menu .menu-brand-name{ font-size:1rem; font-weight:700; color:#e6edf3; line-height:1.4; }
+#menu .menu-brand-tag{ font-size:.72rem; color:#484f58; letter-spacing:.5px; }
+#menu h3{ font-size:.72rem; font-weight:600; color:#484f58; padding:0 22px 14px; letter-spacing:1.5px; }
 #menu button{
-    width:100%;
-    background:transparent;
-    border:none;
-    color:#e6edf3;
-    font-family:inherit;
-    font-size:.95rem;
-    font-weight:500;
-    text-align:right;
-    padding:16px 22px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    transition:background .15s;
-    outline:none !important;
-    -webkit-appearance:none;
-    appearance:none;
+    width:100%; background:transparent; border:none; color:#e6edf3;
+    font-family:inherit; font-size:.95rem; font-weight:500;
+    text-align:right; padding:16px 22px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; transition:background .15s;
 }
-
 #menu button:active{ background:#21262d; }
-#menu button:focus{ outline:none !important; }
-
 #menu button.danger{ color:#f85149; }
-
-#menu .sep{
-    height:1px;
-    background:#21262d;
-    margin:12px 0;
-}
-
-#menu .small{
-    font-size:.72rem;
-    color:#484f58;
-    padding:14px 22px;
-    line-height:2;
-    margin-top:auto;
-}
-
-#overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:15;
-    display:none;
-}
-
+#menu .sep{ height:1px; background:#21262d; margin:12px 0; }
+#menu .small{ font-size:.72rem; color:#484f58; padding:14px 22px; line-height:2; margin-top:auto; }
+#overlay{ position:absolute; inset:0; background:rgba(0,0,0,.6); z-index:15; display:none; }
 #overlay.show{ display:block; }
 
 /* ================= اعلان ================= */
-
 #toast{
-    position:absolute;
-    bottom:28px;
-    left:50%;
+    position:absolute; bottom:28px; left:50%;
     transform:translateX(-50%) translateY(20px);
-    background:#a371f7;
-    color:#0d1117;
-    font-size:.85rem;
-    font-weight:700;
-    padding:12px 22px;
-    border-radius:10px;
-    opacity:0;
-    transition:all .22s ease;
-    pointer-events:none;
-    z-index:30;
-    white-space:nowrap;
-    box-shadow:0 8px 24px rgba(163,113,247,.35);
+    background:#a371f7; color:#0d1117; font-size:.85rem; font-weight:700;
+    padding:12px 22px; border-radius:10px; opacity:0;
+    transition:all .22s ease; pointer-events:none; z-index:30;
+    white-space:nowrap; box-shadow:0 8px 24px rgba(163,113,247,.35);
 }
-
-#toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
-
-/* ================= انتخاب متن ================= */
-
-::selection{
-    background:rgba(163,113,247,.35);
-    color:#fff;
-}
+#toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+::selection{ background:rgba(163,113,247,.35); color:#fff; }
 
 /* ================= تم محافظت از چشم ================= */
-
-body.eye{
-    background:#1a0f00;
-    color:#ffd9a0;
-}
-
+body.eye{ background:#1a0f00; color:#ffd9a0; }
 body.eye #scStart h1{ color:#ffb74d; }
 body.eye #scStart .sub{ color:#b88a4a; }
-body.eye #scStart .brand-logo{
-    filter: brightness(1.35) saturate(1.05) sepia(.15) drop-shadow(0 0 20px rgba(255,183,77,.28));
-}
-body.eye #scStart textarea{
-    background:#0f0800;
-    border-color:#3a2410;
-    color:#ffd9a0;
-}
+body.eye #scStart .brand-logo{ filter: brightness(1.35) saturate(1.05) sepia(.15) drop-shadow(0 0 20px rgba(255,183,77,.28)); }
+body.eye #scStart textarea{ background:#0f0800; border-color:#3a2410; color:#ffd9a0; }
 body.eye #scStart textarea:focus{ border-color:#ffb74d; }
-body.eye #scStart button{
-    background:#2a1800;
-    border-color:#3a2410;
-    color:#ffd9a0;
-}
-body.eye #scStart button.primary{
-    background:#ffb74d;
-    color:#1a0f00;
-    border-color:#ffb74d;
-}
+body.eye #scStart button{ background:#2a1800; border-color:#3a2410; color:#ffd9a0; }
+body.eye #scStart button.primary{ background:#ffb74d; color:#1a0f00; border-color:#ffb74d; }
 body.eye #scStart button.primary:active{ background:#e6a03f; }
 body.eye #scStart .hint{ color:#7a5520; }
-
-body.eye #viewTop{
-    background:#1a0f00;
-    border-bottom-color:#2a1800;
-}
+body.eye #viewTop{ background:#1a0f00; border-bottom-color:#2a1800; }
 body.eye #hamburger{ color:#b88a4a; }
 body.eye #hamburger:active{ color:#ffd9a0; }
-body.eye #viewTop .top-logo{
-    filter: brightness(1.35) saturate(1.05) sepia(.15);
-}
 body.eye #viewTitle{ color:#7a5520; }
 body.eye #counter{ color:#7a5520; }
-
 body.eye #chunk{ color:#ffd9a0; }
-
 body.eye #progressWrap{ background:#2a1800; }
 body.eye #progress{ background:#ffb74d; }
-
 body.eye .navBtn::after{ border-color:#3a2410; }
 body.eye .navBtn:active::after{ border-color:#ffb74d; }
-
-body.eye #menu{
-    background:#241600;
-    border-left-color:#3a2410;
-}
-body.eye #menu .menu-brand img{
-    filter: brightness(1.35) saturate(1.05) sepia(.15);
-}
+body.eye #menu{ background:#241600; border-left-color:#3a2410; }
 body.eye #menu .menu-brand-name{ color:#ffd9a0; }
 body.eye #menu .menu-brand-tag{ color:#7a5520; }
 body.eye #menu h3{ color:#7a5520; }
@@ -547,20 +290,10 @@ body.eye #menu button.danger{ color:#ff8a65; }
 body.eye #menu .sep{ background:#3a2410; }
 body.eye #menu .small{ color:#7a5520; }
 body.eye #overlay{ background:rgba(20,10,0,.7); }
-
-body.eye #toast{
-    background:#ffb74d;
-    color:#1a0f00;
-    box-shadow:0 8px 24px rgba(255,183,77,.35);
-}
-
-body.eye ::selection{
-    background:rgba(255,183,77,.35);
-    color:#1a0f00;
-}
+body.eye #toast{ background:#ffb74d; color:#1a0f00; box-shadow:0 8px 24px rgba(255,183,77,.35); }
+body.eye ::selection{ background:rgba(255,183,77,.35); color:#1a0f00; }
 
 /* ================= واکنش‌گرا ================= */
-
 @media (max-width:600px){
     #chunk{ font-size:1.35rem; line-height:2.1; }
     #viewBody{ padding:30px 20px 80px; }
@@ -569,6 +302,7 @@ body.eye ::selection{
     #scStart textarea{ height:200px; font-size:.95rem; }
     #counter{ font-size:.72rem; min-width:54px; }
     #viewTop .top-logo{ width:24px; height:24px; }
+    .splash-box img { width: 120px; }
 }
 </style>
 </head>
@@ -576,10 +310,18 @@ body.eye ::selection{
 
 <div id="app" tabindex="-1">
 
+    <!-- اسپلش اسکرین (۵ ثانیه) -->
+    <section id="scSplash" class="screen show">
+        <div class="splash-box">
+            <img src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke2.png" alt="تکه اسپلش">
+            <div class="loading-bar"></div>
+        </div>
+    </section>
+
     <!-- خوش‌آمد -->
-    <section id="scStart" class="screen show">
+    <section id="scStart" class="screen">
         <div class="box">
-            <img class="brand-logo" src="https://cdn.imgurl.ir/uploads/l644211_.png" alt="تکه">
+            <img class="brand-logo" src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png" alt="تکه">
             <h1>تکه</h1>
             <p class="sub">متن را بچسبان. هر تکه را جدا نشان می‌دهم.</p>
             <textarea id="input" placeholder="متن جزوه‌ات را اینجا بچسبان...&#10;&#10;هر خط = یک تکه.&#10;خط خالی = مرز بخش جدید.&#10;جمله‌های بلند هم خودکار شکسته می‌شوند."></textarea>
@@ -604,7 +346,7 @@ body.eye ::selection{
                     <line x1="4" y1="17" x2="20" y2="17"/>
                 </svg>
             </button>
-            <img class="top-logo" src="https://cdn.imgurl.ir/uploads/l644211_.png" alt="تکه">
+            <img class="top-logo" src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png" alt="تکه">
             <div id="viewTitle">جزوه</div>
             <div id="counter">۰ / ۰</div>
         </div>
@@ -623,7 +365,7 @@ body.eye ::selection{
         <div id="overlay"></div>
         <nav id="menu">
             <div class="menu-brand">
-                <img src="https://cdn.imgurl.ir/uploads/l644211_.png" alt="تکه">
+                <img src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png" alt="تکه">
                 <div>
                     <div class="menu-brand-name">تکه</div>
                     <div class="menu-brand-tag">جزوه‌خوان</div>
@@ -655,12 +397,8 @@ body.eye ::selection{
 
 var FA = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
 function fa(n){ return String(n).replace(/[0-9]/g, function(d){ return FA[+d]; }); }
-
 function el(id){ return document.getElementById(id); }
-
-function vibrate(p){
-    if(navigator.vibrate){ try{ navigator.vibrate(p); }catch(e){} }
-}
+function vibrate(p){ if(navigator.vibrate){ try{ navigator.vibrate(p); }catch(e){} } }
 
 function blurAll(){
     try{
@@ -691,23 +429,12 @@ function toast(msg){
    ============================================================ */
 
 var KEY = 'tekeh_v1';
-
-var ST = {
-    title: '',
-    raw:   '',
-    parts: [],
-    idx:   0,
-    eye:   false
-};
+var ST = { title: '', raw: '', parts: [], idx: 0, eye: false };
 
 function save(){
     try{
         localStorage.setItem(KEY, JSON.stringify({
-            title: ST.title,
-            raw:   ST.raw,
-            parts: ST.parts,
-            idx:   ST.idx,
-            eye:   ST.eye
+            title: ST.title, raw: ST.raw, parts: ST.parts, idx: ST.idx, eye: ST.eye
         }));
     }catch(e){}
 }
@@ -744,8 +471,7 @@ function splitSentences(text){
 
         var isEnd =
             ch === '.' || ch === '!' || ch === '?' ||
-            ch === '؟' || ch === '؛' || ch === ':' ||
-            ch === '۔';
+            ch === '؟' || ch === '؛' || ch === ':' || ch === '۔';
 
         if(isEnd){
             var next = text.charAt(i+1);
@@ -759,7 +485,6 @@ function splitSentences(text){
 
     var last = buf.trim();
     if(last) parts.push(last);
-
     return parts;
 }
 
@@ -768,7 +493,6 @@ function splitText(raw){
     if(!text) return [];
 
     var sections = text.split(/\n[ \t]*\n+/);
-
     var out = [];
 
     for(var s=0; s<sections.length; s++){
@@ -788,14 +512,11 @@ function splitText(raw){
                 if(sents.length <= 1){
                     out.push(line);
                 } else {
-                    for(var k=0; k<sents.length; k++){
-                        out.push(sents[k]);
-                    }
+                    for(var k=0; k<sents.length; k++){ out.push(sents[k]); }
                 }
             }
         }
     }
-
     return out;
 }
 
@@ -871,7 +592,6 @@ function render(){
     el('progress').style.width = pct.toFixed(2) + '%';
 
     el('viewBody').scrollTop = 0;
-
     save();
 }
 
@@ -899,17 +619,8 @@ function prev(){
     }
 }
 
-el('navNext').onclick = function(e){
-    if(e) e.preventDefault();
-    next();
-    return false;
-};
-
-el('navPrev').onclick = function(e){
-    if(e) e.preventDefault();
-    prev();
-    return false;
-};
+el('navNext').onclick = function(e){ if(e) e.preventDefault(); next(); return false; };
+el('navPrev').onclick = function(e){ if(e) e.preventDefault(); prev(); return false; };
 
 /* ============================================================
    کلیدهای صفحه‌کلید
@@ -921,39 +632,20 @@ document.addEventListener('keydown', function(e){
     var sel = window.getSelection && window.getSelection();
     if(sel && sel.toString().length > 0) return;
 
-    /* جلو */
-    if(e.key === 'ArrowLeft' || e.key === 'ArrowDown' ||
-       e.key === ' ' || e.key === 'PageDown' ||
-       e.key === 'd' || e.key === 'D' ||
-       e.key === 'j' || e.key === 'J'){
-        e.preventDefault();
-        e.stopPropagation();
-        next();
-        return;
+    if(e.key === 'ArrowLeft' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown' || e.key === 'd' || e.key === 'D' || e.key === 'j' || e.key === 'J'){
+        e.preventDefault(); e.stopPropagation(); next(); return;
     }
 
-    /* عقب */
-    if(e.key === 'ArrowRight' || e.key === 'ArrowUp' ||
-       e.key === 'PageUp' ||
-       e.key === 'a' || e.key === 'A' ||
-       e.key === 'k' || e.key === 'K'){
-        e.preventDefault();
-        e.stopPropagation();
-        prev();
-        return;
+    if(e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'a' || e.key === 'A' || e.key === 'k' || e.key === 'K'){
+        e.preventDefault(); e.stopPropagation(); prev(); return;
     }
 
-    if(e.key === 'Escape'){
-        toggleMenu(false);
-    }
+    if(e.key === 'Escape'){ toggleMenu(false); }
 });
 
-/* جلوگیری از اسکرول ناخواسته با Space */
 document.addEventListener('keyup', function(e){
     if(e.key === ' '){
-        if(el('scView').classList.contains('show')){
-            e.preventDefault();
-        }
+        if(el('scView').classList.contains('show')){ e.preventDefault(); }
     }
 }, { passive:false });
 
@@ -970,22 +662,11 @@ function toggleMenu(force){
     blurAll();
 }
 
-el('hamburger').onclick = function(e){
-    if(e) e.preventDefault();
-    toggleMenu();
-    return false;
-};
-
-el('overlay').onclick = function(){
-    toggleMenu(false);
-};
+el('hamburger').onclick = function(e){ if(e) e.preventDefault(); toggleMenu(); return false; };
+el('overlay').onclick = function(){ toggleMenu(false); };
 
 el('mHome').onclick = function(){
-    blurAll();
-    ST.idx = 0;
-    render();
-    toggleMenu(false);
-    vibrate(15);
+    blurAll(); ST.idx = 0; render(); toggleMenu(false); vibrate(15);
 };
 
 el('mEdit').onclick = function(){
@@ -1000,27 +681,18 @@ el('mEdit').onclick = function(){
 function applyEye(){
     document.body.classList.toggle('eye', ST.eye);
     var btn = el('mEye');
-    if(btn){
-        btn.textContent = '◐  محافظت از چشم: ' + (ST.eye ? 'روشن' : 'خاموش');
-    }
+    if(btn){ btn.textContent = '◐  محافظت از چشم: ' + (ST.eye ? 'روشن' : 'خاموش'); }
 }
 
 el('mEye').onclick = function(){
-    blurAll();
-    ST.eye = !ST.eye;
-    applyEye();
-    save();
-    vibrate(15);
+    blurAll(); ST.eye = !ST.eye; applyEye(); save(); vibrate(15);
 };
 
 /* --- خروجی --- */
 
 el('mExport').onclick = function(){
     try{
-        var text = ST.parts.map(function(p, i){
-            return '— تکه ' + fa(i+1) + ' —\n' + p;
-        }).join('\n\n');
-
+        var text = ST.parts.map(function(p, i){ return '— تکه ' + fa(i+1) + ' —\n' + p; }).join('\n\n');
         var blob = new Blob([text], { type:'text/plain;charset=utf-8' });
         var url  = URL.createObjectURL(blob);
         var a    = document.createElement('a');
@@ -1033,9 +705,7 @@ el('mExport').onclick = function(){
         setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
         toast('فایل ذخیره شد');
         toggleMenu(false);
-    }catch(e){
-        toast('ذخیره نشد');
-    }
+    }catch(e){ toast('ذخیره نشد'); }
 };
 
 /* --- پاک کردن --- */
@@ -1057,36 +727,42 @@ el('mClear').onclick = function(){
    جلوگیری از فوکوس ناخواسته
    ============================================================ */
 
-/* هر کلیک روی نواحی غیرتعاملی، فوکوس را پاک کن */
 document.addEventListener('mousedown', function(e){
     var t = e.target;
-    if(t && t.tagName !== 'TEXTAREA' && t.tagName !== 'INPUT'){
-        setTimeout(blurAll, 0);
-    }
+    if(t && t.tagName !== 'TEXTAREA' && t.tagName !== 'INPUT'){ setTimeout(blurAll, 0); }
 }, true);
 
 document.addEventListener('touchstart', function(e){
     var t = e.target;
-    if(t && t.tagName !== 'TEXTAREA' && t.tagName !== 'INPUT'){
-        setTimeout(blurAll, 0);
-    }
+    if(t && t.tagName !== 'TEXTAREA' && t.tagName !== 'INPUT'){ setTimeout(blurAll, 0); }
 }, { passive:true, capture:true });
 
 /* ============================================================
-   شروع اپ
+   شروع اپ و اسپلش اسکرین (۵ ثانیه)
    ============================================================ */
 
 document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
-document.addEventListener('dblclick',     function(e){ e.preventDefault(); }, { passive:false });
+document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive:false });
 
-if(load()){
-    applyEye();
-    show('scView');
-    render();
-} else {
-    applyEye();
-    show('scStart');
-}
+// اسپلش اسکرین به مدت ۵ ثانیه
+setTimeout(function() {
+    var splash = el('scSplash');
+    splash.classList.add('hide');
+    
+    // بعد از محو شدن انیمیشن، اسپلش رو ببند و صفحه اصلی رو باز کن
+    setTimeout(function() {
+        splash.classList.remove('show');
+        
+        if(load()){
+            applyEye();
+            show('scView');
+            render();
+        } else {
+            applyEye();
+            show('scStart');
+        }
+    }, 500); // ۰.۵ ثانیه زمان برای محو شدن
+}, 5000); // ۵۰۰۰ میلی‌ثانیه = ۵ ثانیه
 
 })();
 </script>
