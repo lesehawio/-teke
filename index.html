@@ -7,7 +7,7 @@
 <title>تکه — جزوه‌خوان</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- آیکن و لوگو (تغییر یافته به گیت‌هاب) -->
+<!-- آیکن و لوگو -->
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/lesehawio/-teke/main/teke.png">
 <meta name="apple-mobile-web-app-title" content="تکه">
@@ -59,57 +59,26 @@ body{ transition: background .25s ease, color .25s ease; }
 }
 .screen.show{ display:flex; }
 
-/* ================= اسپلش اسکرین ================= */
+/* ================= اسپلش اسکرین (تمام صفحه و ثابت) ================= */
 #scSplash {
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
     background: #0d1117;
-    z-index: 100;
-    transition: opacity 0.5s ease;
+    display: flex;
+    transition: opacity 0.6s ease;
 }
+
 #scSplash.hide {
     opacity: 0;
     pointer-events: none;
 }
-.splash-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: pulse 2s infinite ease-in-out;
-}
-.splash-box img {
-    width: 160px;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 0 25px rgba(163,113,247,.4));
-}
-.loading-bar {
-    width: 120px;
-    height: 4px;
-    background: #21262d;
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-}
-.loading-bar::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 40%;
-    background: #a371f7;
-    border-radius: 4px;
-    animation: loadAnim 1.5s infinite ease-in-out;
-}
-@keyframes loadAnim {
-    0% { left: -40%; width: 40%; }
-    50% { width: 60%; }
-    100% { left: 100%; width: 40%; }
-}
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+
+#scSplash img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* این باعث می‌شه عکس کل صفحه رو پر کنه */
+    display: block;
 }
 
 /* ================= خوش‌آمد ================= */
@@ -302,7 +271,6 @@ body.eye ::selection{ background:rgba(255,183,77,.35); color:#1a0f00; }
     #scStart textarea{ height:200px; font-size:.95rem; }
     #counter{ font-size:.72rem; min-width:54px; }
     #viewTop .top-logo{ width:24px; height:24px; }
-    .splash-box img { width: 120px; }
 }
 </style>
 </head>
@@ -310,12 +278,9 @@ body.eye ::selection{ background:rgba(255,183,77,.35); color:#1a0f00; }
 
 <div id="app" tabindex="-1">
 
-    <!-- اسپلش اسکرین (۵ ثانیه) -->
-    <section id="scSplash" class="screen show">
-        <div class="splash-box">
-            <img src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke2.png" alt="تکه اسپلش">
-            <div class="loading-bar"></div>
-        </div>
+    <!-- اسپلش اسکرین (تمام صفحه و ثابت) -->
+    <section id="scSplash" class="screen">
+        <img src="https://raw.githubusercontent.com/lesehawio/-teke/main/teke2.png" alt="تکه">
     </section>
 
     <!-- خوش‌آمد -->
@@ -744,12 +709,14 @@ document.addEventListener('touchstart', function(e){
 document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
 document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive:false });
 
-// اسپلش اسکرین به مدت ۵ ثانیه
+// نمایش اسپلش اسکرین
+show('scSplash');
+
+// بعد از ۵ ثانیه، اسپلش محو بشه و بره تو برنامه
 setTimeout(function() {
     var splash = el('scSplash');
     splash.classList.add('hide');
     
-    // بعد از محو شدن انیمیشن، اسپلش رو ببند و صفحه اصلی رو باز کن
     setTimeout(function() {
         splash.classList.remove('show');
         
@@ -761,7 +728,7 @@ setTimeout(function() {
             applyEye();
             show('scStart');
         }
-    }, 500); // ۰.۵ ثانیه زمان برای محو شدن
+    }, 600); // ۰.۶ ثانیه برای انیمیشن محو شدن
 }, 5000); // ۵۰۰۰ میلی‌ثانیه = ۵ ثانیه
 
 })();
